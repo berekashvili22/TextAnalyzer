@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="text-input-div">
+            <form action="{{ url_for('home') }}" method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.text(class="text-input form-control mb-2", rows="10")}}
+                {{ form.submit(class="form-control", value="analyze") }}
+            </form>
+        </div>
+        <div>
+            <h2 class="pt-5 mb-5">ზოგადი ანალიზი</h2>
+            <table class="table table-bordered ">
+                <tbody>
+                  <tr>
+                    <th scope="row">ყველა სიმბოლო</th>
+                    <td>{{ total }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"> ყველა სიმბოლო white space-ის გარეშე</th>
+                    <td>{{ without_white }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ასოთა რაოდენობა</th>
+                    <td>{{ without_symbols }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">სიტყვათა რაოდენობა</th>
+                    <td>{{ words }}</td>
+                  </tr>
+                  <tr>
+                  <th scope="row">ყველაზე ხშირად გამოყენებადი სიტყვა</th>
+                    {% for k,v in most_used.items() %}
+                    {% if v > 0 %}
+                        <td>{{ k }} ({{ v }})</td>
+                        {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    {% endfor %}
+                  </tr>
+                </tbody>
+              </table>
+              <h2>სიტყვები</h2>
+              <table class="table table-bordered" style="width: 230px;">
+                <tbody>
+                    {% for k,v in words_count.items() %}
+                    <tr>
+                        <th scope="row" style="width: 230px;">{{ k }}</th>
+                        <td style="width: 50px; display: flex; justify-content: center;">{{ v }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+
+{% endblock %}
