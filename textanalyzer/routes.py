@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request
 from textanalyzer import app
-from textanalyzer.forms import TextForm
+from textanalyzer.forms import TextForm, FileForm
 import re
 # from textanalyzer.models import User, Account
 
@@ -92,40 +92,68 @@ def all_sentences(text):
     sentences = re.split(r' *[\.\?!][\'"\)\]]* *', new_text)
     return sentences
 
-
-
-
-
 @app.route('/')
 @app.route('/home', methods=['POST', 'GET'])
 def home():
     form = TextForm()
+    form1 = FileForm()
+
+    chars_total = 0
+    chars_without_space = 0
+    chars_without_symbols = 0
+    unique_words = dict()
+    all_words = 0
+    used_most = dict()
+    sentences = list()
+    testt = " "
+
     
-    data = form.text.data
+    if form.submit.data and form.validate_on_submit():
 
-    # txt = len(str(data))
+        data = form.text.data
 
-    #character count
-    chars_total = len(str(data))
-    # character count without white space
-    chars_without_space = character_without_white(str(data))
-    # character count without symbols
-    chars_without_symbols = character_without_symbols(str(data))
-    # words_count = 5
-    unique_words = words_count(str(data))
-    #all words
-    all_words = words_all(str(data))
-    #most_used
-    used_most = most_used(str(data))
-    sentences = all_sentences(str(data))
-    #unique word count
-    #sentecise count
-    #all words
-    #all unique words
+        #character count
+        chars_total = len(str(data))
+        # character count without white space
+        chars_without_space = character_without_white(str(data))
+        # character count without symbols
+        chars_without_symbols = character_without_symbols(str(data))
+        # words_count = 5
+        unique_words = words_count(str(data))
+        #all words
+        all_words = words_all(str(data))
+        #most_used
+        used_most = most_used(str(data))
+        #sentences
+        sentences = all_sentences(str(data))
 
-    return render_template('home.html', form=form,
+    elif form1.submit2.data and form1.validate_on_submit():
+
+        data = form1.text_file.data
+
+        data = form1.text_file.data.read()
+        data = data.decode('utf-8')
+
+        #character count
+        chars_total = len(str(data))
+        # character count without white space
+        chars_without_space = character_without_white(str(data))
+        # character count without symbols
+        chars_without_symbols = character_without_symbols(str(data))
+        # words_count = 5
+        unique_words = words_count(str(data))
+        #all words
+        all_words = words_all(str(data))
+        #most_used
+        used_most = most_used(str(data))
+        #sentences
+        sentences = all_sentences(str(data))
+      
+
+
+    return render_template('home.html', form=form, form1=form1,
                             total=chars_total, without_white=chars_without_space, without_symbols=chars_without_symbols,
-                            words_count=unique_words, words=all_words, most_used=used_most, sentences=sentences)
+                            words_count=unique_words, words=all_words, most_used=used_most, sentences=sentences, testt=testt)
 
 
 @app.route('/about')
