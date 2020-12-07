@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
+        <div>
+          <form action="{{ url_for('home') }}" method="POST" enctype="multipart/form-data">
+            {{ form1.hidden_tag() }}
+            {% if form1.text_file.errors %}
+              {{ form1.text_file(class="form-control-file") }}
+              {% for error in form1.text_file.errors %}
+                <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            {% else %}
+              {{ form1.text_file(class="form-control-file mb-5") }}
+            {% endif %}
+
+            {{ form1.submit2(class="form-control mb-5", value="analyze") }}
+        </form>
+        </div>
         <div class="text-input-div">
             <form action="{{ url_for('home') }}" method="POST">
                 {{ form.hidden_tag() }}
@@ -30,7 +45,11 @@
                   </tr>
                   <tr>
                     <th scope="row">წინადადებების რაოდენობა</th>
-                    <td>{{ sentences|length-1 }}</td>
+                    {% if sentences|length > 1 %}
+                      <td>{{ sentences|length-1 }}</td>
+                    {% else %}
+                      <td>0</td>
+                    {% endif %}
                   </tr>
                   <tr>
                   <th scope="row">ყველაზე ხშირად გამოყენებადი სიტყვა</th>
