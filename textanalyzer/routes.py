@@ -1,6 +1,7 @@
 from flask import render_template, url_for, flash, redirect, request
 from textanalyzer import app
 from textanalyzer.forms import TextForm
+import re
 # from textanalyzer.models import User, Account
 
 # alphabet
@@ -78,6 +79,24 @@ def character_without_symbols(text):
             pass
     return count
 
+def all_sentences(text):
+
+    splited_text = text.split()
+    target = ['ძვ.','(ძვ.', 'წ.', 'მაგ.', 'ა.შ', 'სხვ.', 'გვ.', 'რუს.', '(რუს.', 'აზერ.', '(აზერ.', "(ა.", "ა.", "ბ.", "გ."]
+    new_text = list()
+    for i in splited_text:
+        if i in target:
+            i = i.replace(".", "")
+            new_text.append(i)
+        else:
+            new_text.append(i)
+    new_text = " ".join(new_text)
+    sentences = re.split(r' *[\.\?!][\'"\)\]]* *', new_text)
+    return sentences
+
+
+
+
 
 @app.route('/')
 @app.route('/home', methods=['POST', 'GET'])
@@ -100,6 +119,7 @@ def home():
     all_words = words_all(str(data))
     #most_used
     used_most = most_used(str(data))
+    sentences = all_sentences(str(data))
     #unique word count
     #sentecise count
     #all words
@@ -107,7 +127,7 @@ def home():
 
     return render_template('home.html', form=form,
                             total=chars_total, without_white=chars_without_space, without_symbols=chars_without_symbols,
-                            words_count=unique_words, words=all_words, most_used=used_most)
+                            words_count=unique_words, words=all_words, most_used=used_most, sentences=sentences)
 
 
 @app.route('/about')
