@@ -29,6 +29,10 @@
                     <td>{{ words }}</td>
                   </tr>
                   <tr>
+                    <th scope="row">წინადადებების რაოდენობა</th>
+                    <td>{{ sentences|length-1 }}</td>
+                  </tr>
+                  <tr>
                   <th scope="row">ყველაზე ხშირად გამოყენებადი სიტყვა</th>
                     {% for k,v in most_used.items() %}
                     {% if v > 0 %}
@@ -40,17 +44,32 @@
                   </tr>
                 </tbody>
               </table>
-              <h2>სიტყვები</h2>
-              <table class="table table-bordered" style="width: 230px;">
-                <tbody>
-                    {% for k,v in words_count.items() %}
-                    <tr>
-                        <th scope="row" style="width: 230px;">{{ k }}</th>
-                        <td style="width: 50px; display: flex; justify-content: center;">{{ v }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-              </table>
-
-
+              <hr class="mt-5 mb-5" >   
+              <div class="">
+                <h2>სიტყვები</h2>
+                <table class="table table-bordered" style="width: 230px;">
+                  <tbody>
+                      {% for k,v in words_count.items() %}
+                      <tr>
+                          <th scope="row" style="width: 230px;">{{ k }}</th>
+                          <td style="width: 50px; display: flex; justify-content: center;">{{ v }}</td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <hr class="mt-5 mb-5" >
+              <div class="">
+                <h2 class="mb-5">წინადადებები</h2>
+                {% if sentences|length < 2 %}
+                    <p>-</p>
+                {% else %}
+                  {% for s in sentences %}
+                  <hr>
+                  <p>{{ s }}</p>
+                  {% endfor %}
+                {% endif %}
+              </div>
+    </div>
+  
 {% endblock %}
