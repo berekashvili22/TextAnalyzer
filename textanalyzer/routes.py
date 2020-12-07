@@ -80,13 +80,11 @@ def character_without_symbols(text):
     return count
 
 def all_sentences(text):
-
     splited_text = text.split()
-    target = ['ძვ.','(ძვ.', 'წ.', 'მაგ.', 'ა.შ', 'სხვ.', 'გვ.', 'რუს.', '(რუს.', 'აზერ.', '(აზერ.', "(ა.", "ა.", "ბ.", "გ."]
     new_text = list()
     for i in splited_text:
-        if i in target:
-            i = i.replace(".", "")
+        if (len(i) >= 2 and len(i) <= 3 and i[-1] == ".") or (len(i) >= 3 and len(i) <= 4 and i[0] == "(" or i[-1] == ")"): 
+            i = i.replace(".", "|")
             new_text.append(i)
         else:
             new_text.append(i)
