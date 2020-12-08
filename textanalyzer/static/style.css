@@ -19,4 +19,40 @@ body {
     margin-bottom: 50px;
     border-radius: 3px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.473);
+    position: relative;
+}
+
+
+.file_upload_div {
+    background-color: blue;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s optacity 0.5s;
+    display: none;
+}
+
+.file_upload_active {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+.text-input-div {
+    background-color: red;
+}
+
+.toggleBtn {
+    position: absolute;
+    top: 2%;
+    right: 4%;
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.toggleBtn:focus {
+    outline: none;
 }
