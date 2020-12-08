@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-        <div>
+        <div class="" id="mainFrameTwo" style="display:none;">
           <form action="{{ url_for('home') }}" method="POST" enctype="multipart/form-data">
             {{ form1.hidden_tag() }}
             {% if form1.text_file.errors %}
@@ -13,16 +13,17 @@
               {{ form1.text_file(class="form-control-file mb-5") }}
             {% endif %}
 
-            {{ form1.submit2(class="form-control mb-5", value="analyze") }}
+            {{ form1.submit2(class="form-control mb-5", value="დამუშავება") }}
         </form>
         </div>
-        <div class="text-input-div">
+        <div class="pt-5" id="mainFrameOne">
             <form action="{{ url_for('home') }}" method="POST">
                 {{ form.hidden_tag() }}
                 {{ form.text(class="text-input form-control mb-2", rows="10")}}
-                {{ form.submit(class="form-control", value="analyze") }}
+                {{ form.submit(class="form-control", value="დამუშავება") }}
             </form>
         </div>
+        <button onclick="myFunction()" id="myButton1" class="toggleBtn btn btn-primary">ატვირთე ფაილი</button>
         <div>
             <h2 class="pt-5 mb-5">ზოგადი ანალიზი</h2>
             <table class="table table-bordered ">
