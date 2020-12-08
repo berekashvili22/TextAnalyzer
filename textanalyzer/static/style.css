@@ -42,9 +42,6 @@ body {
 }
 
 .toggleBtn {
-    position: absolute;
-    top: 2%;
-    right: 4%;
     width: 200px;
     height: 40px;
     border: none;
@@ -55,4 +52,22 @@ body {
 
 .toggleBtn:focus {
     outline: none;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.gil {
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 18px;
+}
+
+.logo {
+    padding-left: 5%;
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Architects Daughter', cursive;
 }

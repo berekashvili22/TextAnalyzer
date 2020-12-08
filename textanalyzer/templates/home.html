@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
+      <div class="btn-div">
+        <button onclick="myFunction()" id="myButton1" class="toggleBtn btn btn-primary">ატვირთე ფაილი</button>
+      </div>
         <div class="" id="mainFrameTwo" style="display:none;">
           <form action="{{ url_for('home') }}" method="POST" enctype="multipart/form-data">
             {{ form1.hidden_tag() }}
@@ -10,20 +13,21 @@
                 <span class="text-danger">{{ error }}</span>
               {% endfor %}
             {% else %}
+              <label for="">ატვირთე ფაილი:</label>
               {{ form1.text_file(class="form-control-file mb-5") }}
             {% endif %}
 
-            {{ form1.submit2(class="form-control mb-5", value="დამუშავება") }}
+            {{ form1.submit2(class="gil btn btn-light w-100 mb-5", value="დამუშავება") }}
         </form>
         </div>
         <div class="pt-5" id="mainFrameOne">
             <form action="{{ url_for('home') }}" method="POST">
                 {{ form.hidden_tag() }}
+                <label for="">შეიყვანე ტექსტი:</label>
                 {{ form.text(class="text-input form-control mb-2", rows="10")}}
-                {{ form.submit(class="form-control", value="დამუშავება") }}
+                {{ form.submit(class="gil btn btn-light w-100", value="დამუშავება") }}
             </form>
         </div>
-        <button onclick="myFunction()" id="myButton1" class="toggleBtn btn btn-primary">ატვირთე ფაილი</button>
         <div>
             <h2 class="pt-5 mb-5">ზოგადი ანალიზი</h2>
             <table class="table table-bordered ">
