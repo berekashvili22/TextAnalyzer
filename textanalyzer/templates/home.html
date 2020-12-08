@@ -45,8 +45,12 @@
                     <td>{{ without_symbols }}</td>
                   </tr>
                   <tr>
-                    <th scope="row">სიტყვათა რაოდენობა</th>
+                    <th scope="row">სიტყვების რაოდენობა</th>
                     <td>{{ words }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">უნიკალური სიტყვების რაოდენობა</th>
+                    <td>{{ unique }}</td>
                   </tr>
                   <tr>
                     <th scope="row">წინადადებების რაოდენობა</th>
@@ -59,7 +63,7 @@
                   <tr>
                   <th scope="row">ყველაზე ხშირად გამოყენებადი სიტყვა</th>
                     {% for k,v in most_used.items() %}
-                    {% if v > 0 %}
+                    {% if v > 1 %}
                         <td>{{ k }} ({{ v }})</td>
                         {% else %}
                         <td>-</td>

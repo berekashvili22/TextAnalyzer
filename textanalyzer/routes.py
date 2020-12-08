@@ -60,6 +60,22 @@ def words_all(text):
     all_words_count = str(len(words_new))
     return all_words_count
 
+def unique_words_count(text):
+    words = ('')
+    for i in text:
+        if i in script:
+            words += i
+    words = words.split()
+    words_new = []
+    for i in words:
+        if len(i) >= 2:
+            words_new.append(i)
+        else:
+            pass
+    uni_words = len(set(words_new))
+    return uni_words
+
+
 
 def character_without_white(text):
     count = 0
@@ -101,8 +117,9 @@ def home():
     chars_total = 0
     chars_without_space = 0
     chars_without_symbols = 0
+    unique_words_cnt = 0
     unique_words = dict()
-    all_words = 0
+    all_words = ""
     used_most = dict()
     sentences = list()
     testt = " "
@@ -126,6 +143,8 @@ def home():
         used_most = most_used(str(data))
         #sentences
         sentences = all_sentences(str(data))
+        # unique words
+        unique = unique_words_count(str(data))
 
     elif form1.submit2.data and form1.validate_on_submit():
 
@@ -148,12 +167,15 @@ def home():
         used_most = most_used(str(data))
         #sentences
         sentences = all_sentences(str(data))
+        # unique words
+        unique = unique_words_count(str(data))
       
 
 
     return render_template('home.html', form=form, form1=form1,
                             total=chars_total, without_white=chars_without_space, without_symbols=chars_without_symbols,
-                            words_count=unique_words, words=all_words, most_used=used_most, sentences=sentences, testt=testt)
+                            words_count=unique_words, words=all_words, most_used=used_most, sentences=sentences, testt=testt,
+                            unique = unique)
 
 
 @app.route('/about')
