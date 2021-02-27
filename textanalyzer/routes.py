@@ -123,28 +123,11 @@ def home():
     used_most = dict()
     sentences = list()
     testt = " "
+    unique = 0
 
     
     if form.submit.data and form.validate_on_submit():
-
         data = form.text.data
-
-        #character count
-        chars_total = len(str(data))
-        # character count without white space
-        chars_without_space = character_without_white(str(data))
-        # character count without symbols
-        chars_without_symbols = character_without_symbols(str(data))
-        # words_count = 5
-        unique_words = words_count(str(data))
-        #all words
-        all_words = words_all(str(data))
-        #most_used
-        used_most = most_used(str(data))
-        #sentences
-        sentences = all_sentences(str(data))
-        # unique words
-        unique = unique_words_count(str(data))
 
     elif form1.submit2.data and form1.validate_on_submit():
 
@@ -153,23 +136,23 @@ def home():
         data = form1.text_file.data.read()
         data = data.decode('utf-8')
 
-        #character count
-        chars_total = len(str(data))
-        # character count without white space
-        chars_without_space = character_without_white(str(data))
-        # character count without symbols
-        chars_without_symbols = character_without_symbols(str(data))
-        # words_count = 5
-        unique_words = words_count(str(data))
-        #all words
-        all_words = words_all(str(data))
-        #most_used
-        used_most = most_used(str(data))
-        #sentences
-        sentences = all_sentences(str(data))
-        # unique words
-        unique = unique_words_count(str(data))
-      
+    #character count
+    chars_total = len(str(data))
+    # character count without white space
+    chars_without_space = character_without_white(str(data))
+    # character count without symbols
+    chars_without_symbols = character_without_symbols(str(data))
+    # words_count = 5
+    unique_words = words_count(str(data))
+    #all words
+    all_words = words_all(str(data))
+    #most_used
+    used_most = most_used(str(data))
+    #sentences
+    sentences = all_sentences(str(data))
+    # unique words
+    unique = unique_words_count(str(data))
+    
 
 
     return render_template('home.html', form=form, form1=form1,
